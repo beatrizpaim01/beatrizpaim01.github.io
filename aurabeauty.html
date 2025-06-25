@@ -97,9 +97,9 @@
   </div>
 
   <script>
-    const usuarioLogado = localStorage.getItem("usuarioLogado") === "true";
-
     function comprarOuAdicionar(acao) {
+      const usuarioLogado = localStorage.getItem("usuarioLogado");
+
       if (!usuarioLogado) {
         alert("Você precisa estar logado para realizar essa ação.");
         return;
@@ -117,3 +117,4 @@
   </script>
 </body>
 </html>
+
