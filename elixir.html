@@ -95,20 +95,28 @@
 
   <script>
     function comprarOuAdicionar(acao) {
-      const usuarioLogado = localStorage.getItem("usuarioLogado");
+      const usuarioLogado = localStorage.getItem("usuarioLogado") === "true";
       if (!usuarioLogado) {
         alert("Você precisa estar logado para realizar essa ação.");
         return;
       }
 
       const produto = {
-        name: "Elixir",
-        img: "https://http2.mlstatic.com/D_NQ_NP_2X_758622-MLA83764816419_042025-O.webp",
-        price: 299.90
+        nome: "Elixir",
+        imagem: "https://http2.mlstatic.com/D_NQ_NP_2X_758622-MLA83764816419_042025-O.webp",
+        preco: 299.90
       };
 
-      const carrinho = JSON.parse(localStorage.getItem("cart")) || [];
-      carrinho.push(produto);
+      let carrinho = JSON.parse(localStorage.getItem("cart")) || [];
+      const index = carrinho.findIndex(item => item.nome === produto.nome);
+
+      if (index !== -1) {
+        carrinho[index].quantidade += 1;
+      } else {
+        produto.quantidade = 1;
+        carrinho.push(produto);
+      }
+
       localStorage.setItem("cart", JSON.stringify(carrinho));
 
       if (acao === "comprar") {
@@ -120,4 +128,3 @@
   </script>
 </body>
 </html>
-
