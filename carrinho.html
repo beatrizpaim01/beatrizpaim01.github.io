@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Carrinho - Perfumaria Vênus</title>
   <style>
     body {
@@ -10,81 +10,92 @@
       background-color: #fff0f6;
       color: #333;
     }
+
     .topbar {
       background-color: #ff80ab;
       color: white;
       padding: 10px;
       text-align: center;
     }
+
     .navbar {
       display: flex;
       justify-content: center;
       background-color: #add8e6;
       padding: 10px 0;
     }
+
     .navbar a {
       color: #333;
       text-decoration: none;
       padding: 10px 20px;
       font-weight: bold;
     }
+
     .navbar a:hover {
       background-color: #d0eaff;
       border-radius: 8px;
     }
+
     .container {
       max-width: 900px;
-      margin: 30px auto;
+      margin: 40px auto;
       background: white;
-      padding: 20px;
+      padding: 30px;
       border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
+
     h1 {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
+
     .produto {
       display: flex;
       align-items: center;
       margin-bottom: 20px;
-      border-bottom: 1px solid #ccc;
+      border-bottom: 1px solid #eee;
       padding-bottom: 15px;
     }
+
     .produto img {
       width: 100px;
-      border-radius: 8px;
+      border-radius: 12px;
       margin-right: 20px;
     }
+
     .produto-info {
-      flex-grow: 1;
+      flex: 1;
     }
+
+    .produto-info h3 {
+      margin: 0 0 8px 0;
+    }
+
     .produto-info p {
-      margin: 5px 0;
+      margin: 4px 0;
     }
+
     .total {
-      font-size: 18px;
       text-align: right;
-      margin-top: 20px;
+      font-size: 20px;
       font-weight: bold;
+      margin-top: 30px;
     }
-    button {
-      margin: 10px 5px 0;
-      padding: 10px 20px;
-      border: none;
-      background-color: #ff80ab;
-      color: white;
-      font-size: 16px;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #f06292;
+
+    .mensagem-vazio {
+      text-align: center;
+      font-size: 18px;
+      color: #666;
+      margin-top: 40px;
     }
   </style>
 </head>
 <body>
-  <div class="topbar"><strong>Perfumaria Vênus - Elegância em cada fragrância</strong></div>
+  <div class="topbar">
+    <strong>Perfumaria Vênus - Elegância em cada fragrância</strong>
+  </div>
 
   <div class="navbar">
     <a href="index.html">Início</a>
@@ -95,67 +106,40 @@
 
   <div class="container">
     <h1>Seu Carrinho</h1>
-    <div id="lista-carrinho"></div>
-    <div class="total" id="total"></div>
-    <div style="text-align: right;">
-      <button onclick="finalizarCompra()">Finalizar Compra</button>
-      <button onclick="esvaziarCarrinho()">Esvaziar Carrinho</button>
-    </div>
+    <div id="itens-carrinho"></div>
+    <div class="total" id="total-geral"></div>
   </div>
 
   <script>
-    // Função para carregar os produtos do carrinho
-    function carregarCarrinho() {
-      const container = document.getElementById("lista-carrinho");
-      const totalDiv = document.getElementById("total");
-      const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-      container.innerHTML = "";
+    const itensContainer = document.getElementById("itens-carrinho");
+    const totalGeral = document.getElementById("total-geral");
+    const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+    if (carrinho.length === 0) {
+      itensContainer.innerHTML = "<p class='mensagem-vazio'>Seu carrinho está vazio.</p>";
+      totalGeral.textContent = "";
+    } else {
       let total = 0;
-
-      if (carrinho.length === 0) {
-        container.innerHTML = "<p>Seu carrinho está vazio.</p>";
-        totalDiv.textContent = "";
-        return;
-      }
-
       carrinho.forEach(produto => {
-        const precoNum = parseFloat(produto.preco.replace("R$", "").replace(",", "."));
-        const subtotal = precoNum * (produto.quantidade || 1);
-        total += subtotal;
+        const precoNumerico = parseFloat(produto.preco.replace("R$ ", "").replace(",", "."));
+        total += precoNumerico * (produto.quantidade || 1);
 
-        const div = document.createElement("div");
-        div.className = "produto";
-        div.innerHTML = `
-          <img src="${produto.imagem}" alt="${produto.nome}">
-          <div class="produto-info">
-            <p><strong>${produto.nome}</strong></p>
-            <p>Preço: ${produto.preco}</p>
-            <p>Quantidade: ${produto.quantidade || 1}</p>
-            <p>Subtotal: R$ ${subtotal.toFixed(2).replace(".", ",")}</p>
+        const itemHTML = `
+          <div class="produto">
+            <img src="${produto.imagem}" alt="${produto.nome}">
+            <div class="produto-info">
+              <h3>${produto.nome}</h3>
+              <p>Preço: ${produto.preco}</p>
+              <p>Quantidade: ${produto.quantidade || 1}</p>
+              <p>Total: R$ ${(precoNumerico * (produto.quantidade || 1)).toFixed(2).replace(".", ",")}</p>
+            </div>
           </div>
         `;
-        container.appendChild(div);
+        itensContainer.innerHTML += itemHTML;
       });
 
-      totalDiv.textContent = "Total: R$ " + total.toFixed(2).replace(".", ",");
+      totalGeral.textContent = `Total Geral: R$ ${total.toFixed(2).replace(".", ",")}`;
     }
-
-    // Finalizar compra
-    function finalizarCompra() {
-      alert("Compra finalizada com sucesso!");
-      localStorage.removeItem("carrinho");
-      carregarCarrinho();
-    }
-
-    // Esvaziar o carrinho
-    function esvaziarCarrinho() {
-      if (confirm("Tem certeza que deseja esvaziar o carrinho?")) {
-        localStorage.removeItem("carrinho");
-        carregarCarrinho();
-      }
-    }
-
-    carregarCarrinho();
   </script>
 </body>
 </html>
