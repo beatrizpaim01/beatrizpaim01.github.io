@@ -105,12 +105,13 @@
       };
 
       let carrinho = JSON.parse(localStorage.getItem('cart')) || [];
-      const indexExistente = carrinho.findIndex(p => p.nome === produto.nome);
+      const indexExistente = carrinho.findIndex(p => p.nome === aurabeuty);
 
       if (indexExistente !== -1) {
         carrinho[indexExistente].quantidade += 1;
       } else {
-        carrinho.push(produto);
+         produto.quantidade = 1;  // <-- importante
+          carrinho.push(produto);;
       }
 
       localStorage.setItem('cart', JSON.stringify(carrinho));
