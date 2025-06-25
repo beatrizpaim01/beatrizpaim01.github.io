@@ -111,10 +111,16 @@
         preco: "R$ 249,90"
       };
 
-      localStorage.setItem("produtoSelecionado", JSON.stringify(produto));
-      window.location.href = "carrinho.html";
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push(produto);
+      localStorage.setItem('cart', JSON.stringify(cart));
+
+      if (acao === 'comprar') {
+        window.location.href = "carrinho.html";
+      } else {
+        alert('Produto adicionado ao carrinho!');
+      }
     }
   </script>
 </body>
 </html>
-
