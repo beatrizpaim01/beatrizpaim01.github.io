@@ -26,16 +26,16 @@
 
   <div class="produto">
     <h1>Encanto Floral</h1>
-    <img src="https://a-static.mlcdn.com.br/1500x1500/deo-colonia-florasense-rose-25ml-jequiti/oreidoscatalogos/99019553/1d8deac01036977ea647d7b5c7830685.jpeg" alt="Encanto Floral" />
+    <img src="https://a-static.mlcdn.com.br/1500x1500/deo-colonia-encanto-floral-125ml-o-boticario/oboticario/532412300/p.jpg" alt="Encanto Floral" />
     <p>Preço: R$ 129,90</p>
-
     <button onclick="comprarOuAdicionar('comprar')">Comprar agora</button>
     <button onclick="comprarOuAdicionar('carrinho')">Adicionar ao carrinho</button>
   </div>
 
   <script>
+    const usuarioLogado = localStorage.getItem("usuarioLogado") === "true";
+
     function comprarOuAdicionar(acao) {
-      const usuarioLogado = localStorage.getItem("usuarioLogado") === "true";
       if (!usuarioLogado) {
         alert("Você precisa estar logado para realizar essa ação.");
         return;
@@ -43,15 +43,15 @@
 
       const produto = {
         nome: "Encanto Floral",
-        imagem: "https://a-static.mlcdn.com.br/1500x1500/deo-colonia-florasense-rose-25ml-jequiti/oreidoscatalogos/99019553/1d8deac01036977ea647d7b5c7830685.jpeg",
+        imagem: "https://a-static.mlcdn.com.br/1500x1500/deo-colonia-encanto-floral-125ml-o-boticario/oboticario/532412300/p.jpg",
         preco: 129.90
       };
 
       let carrinho = JSON.parse(localStorage.getItem("cart")) || [];
-      const index = carrinho.findIndex(item => item.nome === produto.nome);
+      const indexExistente = carrinho.findIndex(p => p.nome === produto.nome);
 
-      if (index !== -1) {
-        carrinho[index].quantidade += 1;
+      if (indexExistente !== -1) {
+        carrinho[indexExistente].quantidade += 1;
       } else {
         produto.quantidade = 1;
         carrinho.push(produto);
@@ -62,7 +62,7 @@
       if (acao === "comprar") {
         window.location.href = "carrinho.html";
       } else {
-        alert("Produto adicionado ao carrinho com sucesso!");
+        alert("Produto adicionado ao carrinho!");
       }
     }
   </script>
