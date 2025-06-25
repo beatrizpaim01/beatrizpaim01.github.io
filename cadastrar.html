@@ -90,9 +90,18 @@
       const senha = document.getElementById('senha').value.trim();
 
       if (nome && email && senha) {
-        // Aqui você pode armazenar no localStorage ou futuramente em um backend
+        // Simula o cadastro e login
+        const usuario = {
+          nome: nome,
+          email: email,
+          senha: senha
+        };
+
+        // Salva o usuário "logado" no localStorage
+        localStorage.setItem('usuarioLogado', JSON.stringify(usuario));
+
         alert('Cadastro realizado com sucesso!');
-        window.location.href = "Index.html";
+        window.location.href = "index.html"; // redireciona à página inicial
       } else {
         alert('Por favor, preencha todos os campos.');
       }
