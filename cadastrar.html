@@ -90,18 +90,20 @@
       const senha = document.getElementById('senha').value.trim();
 
       if (nome && email && senha) {
-        // Simula o cadastro e login
         const usuario = {
           nome: nome,
           email: email,
           senha: senha
         };
 
-        // Salva o usuário "logado" no localStorage
-        localStorage.setItem('usuarioLogado', JSON.stringify(usuario));
+        // Salva os dados do usuário
+        localStorage.setItem('user', JSON.stringify(usuario));
+
+        // Define como logado
+        localStorage.setItem('usuarioLogado', "true");
 
         alert('Cadastro realizado com sucesso!');
-        window.location.href = "index.html"; // redireciona à página inicial
+        window.location.href = "index.html";
       } else {
         alert('Por favor, preencha todos os campos.');
       }
@@ -109,3 +111,4 @@
   </script>
 </body>
 </html>
+
