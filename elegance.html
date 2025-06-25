@@ -95,7 +95,7 @@
 
   <script>
     function comprarOuAdicionar(acao) {
-      const usuarioLogado = localStorage.getItem("usuarioLogado");
+      const usuarioLogado = localStorage.getItem("usuarioLogado") === "true";
 
       if (!usuarioLogado) {
         alert("Você precisa estar logado para realizar essa ação.");
@@ -103,13 +103,21 @@
       }
 
       const produto = {
-        name: "Elegance",
-        img: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTHlnSqr1wsCXJ2fMwDZsYr_IR28A0-bhWEsBLJNrDqkbd7Gn2fqrjmX35Dr8esNSaO76Ucr-DutNw2nW4f9D1sJBpojdzPk8PSJjkM2xp0judX1BPzMAUxFQ",
-        price: 169.90
+        nome: "Elegance",
+        imagem: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTHlnSqr1wsCXJ2fMwDZsYr_IR28A0-bhWEsBLJNrDqkbd7Gn2fqrjmX35Dr8esNSaO76Ucr-DutNw2nW4f9D1sJBpojdzPk8PSJjkM2xp0judX1BPzMAUxFQ",
+        preco: 169.90
       };
 
-      const carrinho = JSON.parse(localStorage.getItem("cart")) || [];
-      carrinho.push(produto);
+      let carrinho = JSON.parse(localStorage.getItem("cart")) || [];
+      const index = carrinho.findIndex(item => item.nome === produto.nome);
+
+      if (index !== -1) {
+        carrinho[index].quantidade += 1;
+      } else {
+        produto.quantidade = 1;
+        carrinho.push(produto);
+      }
+
       localStorage.setItem("cart", JSON.stringify(carrinho));
 
       if (acao === "comprar") {
