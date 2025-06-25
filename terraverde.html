@@ -9,33 +9,10 @@
     .navbar { display: flex; justify-content: center; background-color: #add8e6; padding: 10px 0; }
     .navbar a { color: #333; text-decoration: none; padding: 10px 20px; font-weight: bold; }
     .navbar a:hover { background-color: #d0eaff; border-radius: 8px; }
-    .produto {
-      max-width: 800px;
-      margin: 40px auto;
-      text-align: center;
-      background-color: white;
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-    .produto img {
-      max-width: 300px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    }
-    button {
-      margin: 10px;
-      padding: 10px 20px;
-      border: none;
-      background-color: #ff80ab;
-      color: white;
-      font-size: 16px;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #f06292;
-    }
+    .produto { max-width: 800px; margin: 40px auto; text-align: center; background-color: white; padding: 30px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); }
+    .produto img { max-width: 300px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); }
+    button { margin: 10px; padding: 10px 20px; border: none; background-color: #ff80ab; color: white; font-size: 16px; border-radius: 8px; cursor: pointer; }
+    button:hover { background-color: #f06292; }
   </style>
 </head>
 <body>
@@ -56,8 +33,9 @@
   </div>
 
   <script>
+    const usuarioLogado = localStorage.getItem("usuarioLogado") === "true";
+
     function comprarOuAdicionar(acao) {
-      const usuarioLogado = localStorage.getItem("usuarioLogado");
       if (!usuarioLogado) {
         alert("Você precisa estar logado para realizar essa ação.");
         return;
@@ -66,25 +44,25 @@
       const produto = {
         nome: "Terra Verde",
         imagem: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcS0b7uKVcSu2PJjLkbbqWYXeEUDbRVUAPEqOfdtCL6efE253UJy-vl0Itlwca7fwLk-U8V97OQL-96RnNH2um6BKjEleucKXGXzZ80EBxw_Okyx4iP_qdpy",
-        preco: 139.90,
-        quantidade: 1
+        preco: 139.90
       };
 
-      let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-      const index = carrinho.findIndex(item => item.nome === produto.nome);
+      let carrinho = JSON.parse(localStorage.getItem("cart")) || [];
+      const indexExistente = carrinho.findIndex(p => p.nome === produto.nome);
 
-      if (index !== -1) {
-        carrinho[index].quantidade += 1;
+      if (indexExistente !== -1) {
+        carrinho[indexExistente].quantidade += 1;
       } else {
+        produto.quantidade = 1;
         carrinho.push(produto);
       }
 
-      localStorage.setItem("carrinho", JSON.stringify(carrinho));
+      localStorage.setItem("cart", JSON.stringify(carrinho));
 
       if (acao === "comprar") {
         window.location.href = "carrinho.html";
       } else {
-        alert("Produto adicionado ao carrinho com sucesso!");
+        alert("Produto adicionado ao carrinho!");
       }
     }
   </script>
