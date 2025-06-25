@@ -210,11 +210,10 @@
       alert("Compra finalizada com sucesso! Obrigado por comprar na Perfumaria Vênus.");
       localStorage.removeItem('cart');
       atualizarCarrinho();
-      // Aqui você pode redirecionar para uma página de agradecimento ou outra
+      // redirecionar para página de agradecimento, se quiser:
       // window.location.href = "obrigado.html";
     }
 
-    // Atualiza o carrinho quando a página carrega
     window.onload = atualizarCarrinho;
   </script>
 
