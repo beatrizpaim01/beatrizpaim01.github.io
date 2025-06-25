@@ -11,7 +11,6 @@
       color: #333;
     }
 
-    /* Topbar */
     .topbar {
       background-color: #ff80ab;
       color: white;
@@ -19,7 +18,6 @@
       text-align: center;
     }
 
-    /* Navbar */
     .navbar {
       display: flex;
       justify-content: center;
@@ -39,7 +37,6 @@
       border-radius: 8px;
     }
 
-    /* Produto */
     .produto {
       max-width: 800px;
       margin: 40px auto;
@@ -97,23 +94,31 @@
   </div>
 
   <script>
-    const usuarioLogado = localStorage.getItem("usuarioLogado") === "true";
-
     function comprarOuAdicionar(acao) {
+      const usuarioLogado = localStorage.getItem("usuarioLogado");
+
       if (!usuarioLogado) {
         alert("Você precisa estar logado para realizar essa ação.");
         return;
       }
 
       const produto = {
-        nome: "Dancing Light",
-        imagem: "https://www.olfactivestudio.com/cdn/shop/products/DancingLightSquare_LD_39d02aa0-c8cd-4182-8b8a-3b72b5ad24c5.jpg?v=1648050763&width=1500",
-        preco: "R$ 319,90"
+        name: "Dancing Light",
+        img: "https://www.olfactivestudio.com/cdn/shop/products/DancingLightSquare_LD_39d02aa0-c8cd-4182-8b8a-3b72b5ad24c5.jpg?v=1648050763&width=1500",
+        price: 319.90
       };
 
-      localStorage.setItem("produtoSelecionado", JSON.stringify(produto));
-      window.location.href = "carrinho.html";
+      const carrinho = JSON.parse(localStorage.getItem("cart")) || [];
+      carrinho.push(produto);
+      localStorage.setItem("cart", JSON.stringify(carrinho));
+
+      if (acao === "comprar") {
+        window.location.href = "carrinho.html";
+      } else {
+        alert("Produto adicionado ao carrinho com sucesso!");
+      }
     }
   </script>
 </body>
 </html>
+
