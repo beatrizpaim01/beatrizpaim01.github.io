@@ -11,7 +11,6 @@
       color: #333;
     }
 
-    /* Topbar */
     .topbar {
       background-color: #ff80ab;
       color: white;
@@ -19,7 +18,6 @@
       text-align: center;
     }
 
-    /* Navbar */
     .navbar {
       display: flex;
       justify-content: center;
@@ -39,7 +37,6 @@
       border-radius: 8px;
     }
 
-    /* Produto */
     .produto {
       max-width: 800px;
       margin: 40px auto;
@@ -98,7 +95,7 @@
 
   <script>
     function comprarOuAdicionar(acao) {
-      const usuarioLogado = localStorage.getItem("usuarioLogado");
+      const usuarioLogado = localStorage.getItem("usuarioLogado") === "true";
 
       if (!usuarioLogado) {
         alert("Você precisa estar logado para realizar essa ação.");
@@ -108,12 +105,13 @@
       const produto = {
         nome: "Aura Beauty",
         imagem: "https://http2.mlstatic.com/D_Q_NP_790449-MLA80847664053_112024-O.webp",
-        preco: "R$ 249,90"
+        preco: "R$ 249,90",
+        quantidade: 1
       };
 
-      let cart = JSON.parse(localStorage.getItem('cart')) || [];
-      cart.push(produto);
-      localStorage.setItem('cart', JSON.stringify(cart));
+      let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+      carrinho.push(produto);
+      localStorage.setItem('carrinho', JSON.stringify(carrinho));
 
       if (acao === 'comprar') {
         window.location.href = "carrinho.html";
@@ -124,3 +122,4 @@
   </script>
 </body>
 </html>
+
