@@ -83,9 +83,8 @@
   </div>
 
   <script>
-    const usuarioLogado = localStorage.getItem("usuarioLogado") === "true";
-
     function comprarOuAdicionar(acao) {
+      const usuarioLogado = localStorage.getItem("usuarioLogado");
       if (!usuarioLogado) {
         alert("Você precisa estar logado para realizar essa ação.");
         return;
@@ -95,7 +94,6 @@
         nome: "Taste of Kiss",
         imagem: "https://brbrand.com.br/wp-content/uploads/2023/08/TASTE-OF-KISS-LA-RIVE-3.png",
         preco: 189.90,
-        precoFormatado: "R$ 189,90",
         quantidade: 1
       };
 
@@ -113,7 +111,7 @@
       if (acao === "comprar") {
         window.location.href = "carrinho.html";
       } else {
-        alert("Produto adicionado ao carrinho!");
+        alert("Produto adicionado ao carrinho com sucesso!");
       }
     }
   </script>
