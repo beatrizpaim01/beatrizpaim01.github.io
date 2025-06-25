@@ -96,9 +96,8 @@
 
     <div class="resumo">
       <h2>Resumo do Pedido</h2>
-      <p><strong>Produto:</strong> Aurora (exemplo)</p>
-      <p><strong>Preço:</strong> R$ 109,90</p>
-      <p><strong>Total:</strong> R$ 109,90</p>
+      <div id="resumo-pedido"></div>
+      <p><strong>Total:</strong> <span id="total">R$ 0,00</span></p>
     </div>
 
     <form class="formulario" onsubmit="confirmarCompra(event)">
@@ -129,11 +128,49 @@
   </div>
 
   <script>
+    const carrinho = JSON.parse(localStorage.getItem('cart')) || [];
+
+    function exibirResumo() {
+      const container = document.getElementById('resumo-pedido');
+      const totalEl = document.getElementById('total');
+      let total = 0;
+      container.innerHTML = '';
+
+      if (carrinho.length === 0) {
+        container.innerHTML = "<p>Seu carrinho está vazio.</p>";
+        totalEl.textContent = "R$ 0,00";
+        return;
+      }
+
+      carrinho.forEach(produto => {
+        const precoNum = typeof produto.price === "string"
+          ? parseFloat(produto.price.replace("R$", "").replace(",", "."))
+          : produto.price;
+
+        total += precoNum;
+
+        container.innerHTML += `
+          <p><strong>${produto.name}</strong> - R$ ${precoNum.toFixed(2)}</p>
+        `;
+      });
+
+      totalEl.textContent = `R$ ${total.toFixed(2)}`;
+    }
+
     function confirmarCompra(event) {
       event.preventDefault();
+
+      if (carrinho.length === 0) {
+        alert("Seu carrinho está vazio.");
+        return;
+      }
+
       alert("Pedido confirmado! Obrigado por comprar na Perfumaria Vênus.");
+      localStorage.removeItem("cart");
       window.location.href = "index.html";
     }
+
+    exibirResumo();
   </script>
 
 </body>
