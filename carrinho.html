@@ -1,157 +1,208 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Carrinho | Perfumaria Vênus</title>
+  <meta charset="UTF-8" />
+  <title>Carrinho - Perfumaria Vênus</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      background-color: #fff;
+      font-family: Arial, sans-serif;
+      background-color: #fff0f6;
       color: #333;
     }
-
-    .navbar {
-      background-color: #f8bbd0;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .navbar .logo {
-      font-weight: bold;
-      font-size: 1.5rem;
-    }
-
-    .navbar nav a {
-      margin: 0 1rem;
-      text-decoration: none;
-      color: #333;
-    }
-
-    .container {
-      padding: 2rem;
-    }
-
-    h2 {
+    .topbar {
+      background-color: #ff80ab;
+      color: white;
+      padding: 10px;
       text-align: center;
-      margin-bottom: 2rem;
     }
-
-    .cart-item {
+    .navbar {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #ddd;
-      padding: 1rem 0;
+      justify-content: center;
+      background-color: #add8e6;
+      padding: 10px 0;
     }
-
-    .cart-item img {
-      width: 80px;
+    .navbar a {
+      color: #333;
+      text-decoration: none;
+      padding: 10px 20px;
+      font-weight: bold;
+    }
+    .navbar a:hover {
+      background-color: #d0eaff;
       border-radius: 8px;
     }
-
-    .cart-info {
-      flex: 1;
-      margin-left: 1rem;
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: white;
+      padding: 20px 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
-
-    .total {
-      font-weight: bold;
-      font-size: 1.2rem;
-      text-align: right;
-      margin-top: 2rem;
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
     }
-
-    .actions {
-      text-align: right;
-      margin-top: 1rem;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
     }
-
-    .btn {
-      background-color: #b3e5fc;
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+    }
+    th {
+      background-color: #ff80ab;
+      color: white;
+      border-radius: 8px 8px 0 0;
+    }
+    img {
+      max-width: 80px;
+      border-radius: 8px;
+    }
+    input[type="number"] {
+      width: 60px;
+      padding: 5px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #ff80ab;
+      color: white;
       border: none;
-      padding: 0.7rem 1.2rem;
-      margin-left: 1rem;
+      border-radius: 8px;
       cursor: pointer;
-      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s;
     }
-
-    .btn:hover {
-      background-color: #81d4fa;
+    button:hover {
+      background-color: #f06292;
+    }
+    .remover-btn {
+      background-color: #e57373;
+      padding: 6px 12px;
+      font-size: 14px;
+    }
+    .remover-btn:hover {
+      background-color: #ef5350;
+    }
+    .total {
+      text-align: right;
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
+  <div class="topbar"><strong>Perfumaria Vênus - Elegância em cada fragrância</strong></div>
   <div class="navbar">
-    <div class="logo">PV</div>
-    <nav>
-      <a href="index.html">Início</a>
-      <a href="historia.html">História</a>
-      <a href="ondecomprar.html">Onde Comprar</a>
-      <a href="produtos.html">Produtos</a>
-      <a href="carrinho.html">🛒 Carrinho</a>
-      <a href="entrar.html" id="loginBtn">Entrar</a>
-    </nav>
+    <a href="index.html">Início</a>
+    <a href="produtos.html">Produtos</a>
+    <a href="carrinho.html">Carrinho</a>
+    <a href="entrar.html">Login</a>
   </div>
 
   <div class="container">
-    <h2>Seu Carrinho</h2>
-    <div id="cartItems"></div>
-    <div class="total" id="total">Total: R$ 0,00</div>
-    <div class="actions">
-      <button class="btn" onclick="finalizarCompra()">Finalizar Compra</button>
+    <h1>Seu Carrinho</h1>
+    <table id="tabela-carrinho">
+      <thead>
+        <tr>
+          <th>Produto</th>
+          <th>Imagem</th>
+          <th>Preço Unitário</th>
+          <th>Quantidade</th>
+          <th>Subtotal</th>
+          <th>Remover</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Produtos vão aparecer aqui via JS -->
+      </tbody>
+    </table>
+
+    <div class="total" id="total-carrinho">Total: R$ 0,00</div>
+
+    <div style="text-align: center; margin-top: 30px;">
+      <button id="finalizar-compra">Finalizar Compra</button>
     </div>
   </div>
 
   <script>
-    function renderCarrinho() {
-      const cartContainer = document.getElementById('cartItems');
-      const totalEl = document.getElementById('total');
-      cartContainer.innerHTML = '';
+    function formatarPreco(valor) {
+      return "R$ " + valor.toFixed(2).replace('.', ',');
+    }
+
+    function carregarCarrinho() {
+      const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+      const tbody = document.querySelector("#tabela-carrinho tbody");
+      tbody.innerHTML = "";
+
       let total = 0;
 
-      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      carrinho.forEach((produto, index) => {
+        const subtotal = produto.preco * produto.quantidade;
+        total += subtotal;
 
-      if (cart.length === 0) {
-        cartContainer.innerHTML = '<p>Seu carrinho está vazio.</p>';
-        totalEl.textContent = 'Total: R$ 0,00';
-        return;
-      }
+        const tr = document.createElement("tr");
 
-      cart.forEach(produto => {
-        total += parseFloat(produto.preco.replace('R$', '').replace(',', '.'));
-        const div = document.createElement('div');
-        div.className = 'cart-item';
-        div.innerHTML = `
-          <img src="${produto.imagem}" alt="${produto.nome}">
-          <div class="cart-info">
-            <h4>${produto.nome}</h4>
-            <p>${produto.preco}</p>
-          </div>
+        tr.innerHTML = `
+          <td>${produto.nome}</td>
+          <td><img src="${produto.imagem}" alt="${produto.nome}"></td>
+          <td>${formatarPreco(produto.preco)}</td>
+          <td>
+            <input type="number" min="1" value="${produto.quantidade}" data-index="${index}" class="quantidade-input" />
+          </td>
+          <td>${formatarPreco(subtotal)}</td>
+          <td><button class="remover-btn" data-index="${index}">X</button></td>
         `;
-        cartContainer.appendChild(div);
+
+        tbody.appendChild(tr);
       });
 
-      totalEl.textContent = `Total: R$ ${total.toFixed(2).replace('.', ',')}`;
+      document.getElementById("total-carrinho").textContent = "Total: " + formatarPreco(total);
+
+      // Eventos para inputs de quantidade
+      document.querySelectorAll(".quantidade-input").forEach(input => {
+        input.addEventListener("change", (e) => {
+          const idx = e.target.getAttribute("data-index");
+          let novaQuantidade = parseInt(e.target.value);
+          if (isNaN(novaQuantidade) || novaQuantidade < 1) {
+            novaQuantidade = 1;
+            e.target.value = 1;
+          }
+          carrinho[idx].quantidade = novaQuantidade;
+          localStorage.setItem("carrinho", JSON.stringify(carrinho));
+          carregarCarrinho();
+        });
+      });
+
+      // Eventos para remover produtos
+      document.querySelectorAll(".remover-btn").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          const idx = e.target.getAttribute("data-index");
+          carrinho.splice(idx, 1);
+          localStorage.setItem("carrinho", JSON.stringify(carrinho));
+          carregarCarrinho();
+        });
+      });
     }
 
-    function finalizarCompra() {
-      const usuarioLogado = localStorage.getItem("usuarioLogado");
+    document.getElementById("finalizar-compra").addEventListener("click", () => {
+      alert("Compra finalizada! Obrigado por comprar na Perfumaria Vênus.");
+      localStorage.removeItem("carrinho");
+      carregarCarrinho();
+      // Aqui você pode redirecionar para uma página de confirmação, por exemplo
+    });
 
-      if (!usuarioLogado) {
-        alert('Você precisa estar logado para finalizar a compra.');
-        return;
-      }
-
-      alert('Compra finalizada com sucesso!');
-      localStorage.removeItem('cart');
-      window.location.href = "confirmarcompra.html";
-    }
-
-    renderCarrinho();
+    // Inicializa a página carregando o carrinho
+    carregarCarrinho();
   </script>
 </body>
 </html>
