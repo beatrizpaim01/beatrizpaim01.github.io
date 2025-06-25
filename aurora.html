@@ -45,13 +45,21 @@
       const produto = {
         nome: "Aurora",
         imagem: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcT-p3vpeaIDSAkc0cJgY20BBu_Rf7dcpvx4ww24aFWyMdouJMI-zoqyIlPFNPxUblNk2fCEociBkcuFQXSC12xWWmc79yxY2rXz-ehhRjQTkKMaklDrTc-grQ",
-        preco: "R$ 109,90"
+        preco: 109.90
       };
 
-      localStorage.setItem("produtoSelecionado", JSON.stringify(produto));
-      window.location.href = "carrinho.html";
+      let carrinho = JSON.parse(localStorage.getItem('cart')) || [];
+      carrinho.push(produto);
+      localStorage.setItem('cart', JSON.stringify(carrinho));
+
+      if (acao === 'comprar') {
+        window.location.href = "carrinho.html";
+      } else {
+        alert("Produto adicionado ao carrinho!");
+      }
     }
   </script>
 </body>
 </html>
+
 
