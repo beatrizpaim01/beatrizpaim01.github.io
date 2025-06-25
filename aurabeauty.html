@@ -70,12 +70,10 @@
   </style>
 </head>
 <body>
-  <!-- Topbar -->
   <div class="topbar">
     <strong>Perfumaria Vênus - Elegância em cada fragrância</strong>
   </div>
 
-  <!-- Navbar -->
   <div class="navbar">
     <a href="index.html">Início</a>
     <a href="produtos.html">Produtos</a>
@@ -83,20 +81,17 @@
     <a href="entrar.html">Login</a>
   </div>
 
-  <!-- Produto -->
   <div class="produto">
     <h1>Aura Beauty</h1>
     <img src="https://http2.mlstatic.com/D_Q_NP_790449-MLA80847664053_112024-O.webp" alt="Aura Beauty" />
     <p>Preço: R$ 249,90</p>
-
     <button onclick="comprarOuAdicionar('comprar')">Comprar agora</button>
     <button onclick="comprarOuAdicionar('carrinho')">Adicionar ao carrinho</button>
   </div>
 
   <script>
     function comprarOuAdicionar(acao) {
-      const usuarioLogado = localStorage.getItem("usuarioLogado") === "true";
-
+      const usuarioLogado = localStorage.getItem("usuarioLogado");
       if (!usuarioLogado) {
         alert("Você precisa estar logado para realizar essa ação.");
         return;
@@ -105,13 +100,20 @@
       const produto = {
         nome: "Aura Beauty",
         imagem: "https://http2.mlstatic.com/D_Q_NP_790449-MLA80847664053_112024-O.webp",
-        preco: "R$ 249,90",
+        preco: 249.90,
         quantidade: 1
       };
 
-      let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-      carrinho.push(produto);
-      localStorage.setItem('carrinho', JSON.stringify(carrinho));
+      let carrinho = JSON.parse(localStorage.getItem('cart')) || [];
+      const indexExistente = carrinho.findIndex(p => p.nome === produto.nome);
+
+      if (indexExistente !== -1) {
+        carrinho[indexExistente].quantidade += 1;
+      } else {
+        carrinho.push(produto);
+      }
+
+      localStorage.setItem('cart', JSON.stringify(carrinho));
 
       if (acao === 'comprar') {
         window.location.href = "carrinho.html";
@@ -122,4 +124,3 @@
   </script>
 </body>
 </html>
-
