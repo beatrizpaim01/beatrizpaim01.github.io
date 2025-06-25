@@ -54,6 +54,7 @@
     .produto {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       margin-bottom: 20px;
       border-bottom: 1px solid #eee;
       padding-bottom: 15px;
@@ -75,6 +76,43 @@
 
     .produto-info p {
       margin: 4px 0;
+    }
+
+    .quantidade {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 10px 0;
+    }
+
+    .quantidade button {
+      padding: 4px 10px;
+      font-size: 18px;
+      font-weight: bold;
+      background-color: #ff80ab;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .quantidade span {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .remover-btn {
+      background-color: #e57373;
+      border: none;
+      padding: 6px 12px;
+      color: white;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .remover-btn:hover {
+      background-color: #d32f2f;
     }
 
     .total {
@@ -113,16 +151,25 @@
   <script>
     const itensContainer = document.getElementById("itens-carrinho");
     const totalGeral = document.getElementById("total-geral");
-    const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
 
-    if (carrinho.length === 0) {
-      itensContainer.innerHTML = "<p class='mensagem-vazio'>Seu carrinho está vazio.</p>";
-      totalGeral.textContent = "";
-    } else {
+    let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+    function renderizarCarrinho() {
+      itensContainer.innerHTML = "";
       let total = 0;
-      carrinho.forEach(produto => {
+
+      if (carrinho.length === 0) {
+        itensContainer.innerHTML = "<p class='mensagem-vazio'>Seu carrinho está vazio.</p>";
+        totalGeral.textContent = "";
+        return;
+      }
+
+      carrinho.forEach((produto, index) => {
+        if (!produto.quantidade) produto.quantidade = 1;
+
         const precoNumerico = parseFloat(produto.preco.replace("R$ ", "").replace(",", "."));
-        total += precoNumerico * (produto.quantidade || 1);
+        const totalItem = precoNumerico * produto.quantidade;
+        total += totalItem;
 
         const itemHTML = `
           <div class="produto">
@@ -130,8 +177,13 @@
             <div class="produto-info">
               <h3>${produto.nome}</h3>
               <p>Preço: ${produto.preco}</p>
-              <p>Quantidade: ${produto.quantidade || 1}</p>
-              <p>Total: R$ ${(precoNumerico * (produto.quantidade || 1)).toFixed(2).replace(".", ",")}</p>
+              <div class="quantidade">
+                <button onclick="alterarQuantidade(${index}, -1)">−</button>
+                <span>${produto.quantidade}</span>
+                <button onclick="alterarQuantidade(${index}, 1)">+</button>
+              </div>
+              <p>Total: R$ ${totalItem.toFixed(2).replace(".", ",")}</p>
+              <button class="remover-btn" onclick="removerProduto(${index})">Remover</button>
             </div>
           </div>
         `;
@@ -139,7 +191,21 @@
       });
 
       totalGeral.textContent = `Total Geral: R$ ${total.toFixed(2).replace(".", ",")}`;
+      localStorage.setItem("carrinho", JSON.stringify(carrinho));
     }
+
+    function alterarQuantidade(index, delta) {
+      carrinho[index].quantidade += delta;
+      if (carrinho[index].quantidade < 1) carrinho[index].quantidade = 1;
+      renderizarCarrinho();
+    }
+
+    function removerProduto(index) {
+      carrinho.splice(index, 1);
+      renderizarCarrinho();
+    }
+
+    renderizarCarrinho();
   </script>
 </body>
 </html>
