@@ -10,36 +10,28 @@
       background-color: #fff0f6;
       color: #333;
     }
-
-    /* Topbar */
     .topbar {
       background-color: #ff80ab;
       color: white;
       padding: 10px;
       text-align: center;
     }
-
-    /* Navbar */
     .navbar {
       display: flex;
       justify-content: center;
       background-color: #add8e6;
       padding: 10px 0;
     }
-
     .navbar a {
       color: #333;
       text-decoration: none;
       padding: 10px 20px;
       font-weight: bold;
     }
-
     .navbar a:hover {
       background-color: #d0eaff;
       border-radius: 8px;
     }
-
-    /* Produto */
     .produto {
       max-width: 800px;
       margin: 40px auto;
@@ -49,13 +41,11 @@
       border-radius: 16px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
-
     .produto img {
       max-width: 300px;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
-
     button {
       margin: 10px;
       padding: 10px 20px;
@@ -66,19 +56,16 @@
       border-radius: 8px;
       cursor: pointer;
     }
-
     button:hover {
       background-color: #f06292;
     }
   </style>
 </head>
 <body>
-  <!-- Topbar -->
   <div class="topbar">
     <strong>Perfumaria Vênus - Elegância em cada fragrância</strong>
   </div>
 
-  <!-- Navbar -->
   <div class="navbar">
     <a href="index.html">Início</a>
     <a href="produtos.html">Produtos</a>
@@ -86,7 +73,6 @@
     <a href="entrar.html">Login</a>
   </div>
 
-  <!-- Produto -->
   <div class="produto">
     <h1>Taste of Kiss</h1>
     <img src="https://brbrand.com.br/wp-content/uploads/2023/08/TASTE-OF-KISS-LA-RIVE-3.png" alt="Taste of Kiss" />
@@ -108,11 +94,27 @@
       const produto = {
         nome: "Taste of Kiss",
         imagem: "https://brbrand.com.br/wp-content/uploads/2023/08/TASTE-OF-KISS-LA-RIVE-3.png",
-        preco: "R$ 189,90"
+        preco: 189.90,
+        precoFormatado: "R$ 189,90",
+        quantidade: 1
       };
 
-      localStorage.setItem("produtoSelecionado", JSON.stringify(produto));
-      window.location.href = "carrinho.html";
+      let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+      const index = carrinho.findIndex(item => item.nome === produto.nome);
+
+      if (index !== -1) {
+        carrinho[index].quantidade += 1;
+      } else {
+        carrinho.push(produto);
+      }
+
+      localStorage.setItem("carrinho", JSON.stringify(carrinho));
+
+      if (acao === "comprar") {
+        window.location.href = "carrinho.html";
+      } else {
+        alert("Produto adicionado ao carrinho!");
+      }
     }
   </script>
 </body>
