@@ -35,20 +35,28 @@
 
   <script>
     function comprarOuAdicionar(acao) {
-      const usuarioLogado = localStorage.getItem("usuarioLogado");
+      const usuarioLogado = localStorage.getItem("usuarioLogado") === "true";
       if (!usuarioLogado) {
         alert("Você precisa estar logado para realizar essa ação.");
         return;
       }
 
       const produto = {
-        name: "Encanto Floral",
-        img: "https://a-static.mlcdn.com.br/1500x1500/deo-colonia-florasense-rose-25ml-jequiti/oreidoscatalogos/99019553/1d8deac01036977ea647d7b5c7830685.jpeg",
-        price: 129.90
+        nome: "Encanto Floral",
+        imagem: "https://a-static.mlcdn.com.br/1500x1500/deo-colonia-florasense-rose-25ml-jequiti/oreidoscatalogos/99019553/1d8deac01036977ea647d7b5c7830685.jpeg",
+        preco: 129.90
       };
 
-      const carrinho = JSON.parse(localStorage.getItem("cart")) || [];
-      carrinho.push(produto);
+      let carrinho = JSON.parse(localStorage.getItem("cart")) || [];
+      const index = carrinho.findIndex(item => item.nome === produto.nome);
+
+      if (index !== -1) {
+        carrinho[index].quantidade += 1;
+      } else {
+        produto.quantidade = 1;
+        carrinho.push(produto);
+      }
+
       localStorage.setItem("cart", JSON.stringify(carrinho));
 
       if (acao === "comprar") {
@@ -60,4 +68,3 @@
   </script>
 </body>
 </html>
-
