@@ -105,12 +105,20 @@
       const produto = {
         nome: "Aurora Borealis",
         imagem: "https://francegallery.me/wp-content/uploads/2024/02/ISSEY-MIYAKE-NUIT-DISSEY-BOIS-ARCTIC-WALL.png",
-        preco: "R$ 279,90"
+        preco: 279.90
       };
 
-      localStorage.setItem("produtoSelecionado", JSON.stringify(produto));
-      window.location.href = "carrinho.html";
+      let carrinho = JSON.parse(localStorage.getItem('cart')) || [];
+      carrinho.push(produto);
+      localStorage.setItem('cart', JSON.stringify(carrinho));
+
+      if (acao === 'comprar') {
+        window.location.href = "carrinho.html";
+      } else {
+        alert("Produto adicionado ao carrinho!");
+      }
     }
   </script>
 </body>
 </html>
+
