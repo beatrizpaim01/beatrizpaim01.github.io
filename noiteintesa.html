@@ -17,6 +17,7 @@
 </head>
 <body>
   <div class="topbar"><strong>Perfumaria Vênus - Elegância em cada fragrância</strong></div>
+
   <div class="navbar">
     <a href="index.html">Início</a>
     <a href="produtos.html">Produtos</a>
@@ -28,15 +29,13 @@
     <h1>Noite Intensa</h1>
     <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQCiiL7HQTuAohpVntzHJQyIsFzCFvFuszrdkBJHHAf3rFoQ_Bs84j_8hexpIhW0DGy1Qrz978-fKcYyuKmbziYCWMJkTHmNZb7QiOEBaecXb35NlLJgatv" alt="Noite Intensa" />
     <p>Preço: R$ 149,90</p>
-
     <button onclick="comprarOuAdicionar('comprar')">Comprar agora</button>
     <button onclick="comprarOuAdicionar('carrinho')">Adicionar ao carrinho</button>
   </div>
 
   <script>
-    const usuarioLogado = localStorage.getItem("usuarioLogado") === "true";
-
     function comprarOuAdicionar(acao) {
+      const usuarioLogado = localStorage.getItem("usuarioLogado");
       if (!usuarioLogado) {
         alert("Você precisa estar logado para realizar essa ação.");
         return;
@@ -46,7 +45,6 @@
         nome: "Noite Intensa",
         imagem: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQCiiL7HQTuAohpVntzHJQyIsFzCFvFuszrdkBJHHAf3rFoQ_Bs84j_8hexpIhW0DGy1Qrz978-fKcYyuKmbziYCWMJkTHmNZb7QiOEBaecXb35NlLJgatv",
         preco: 149.90,
-        precoFormatado: "R$ 149,90",
         quantidade: 1
       };
 
@@ -64,10 +62,9 @@
       if (acao === "comprar") {
         window.location.href = "carrinho.html";
       } else {
-        alert("Produto adicionado ao carrinho!");
+        alert("Produto adicionado ao carrinho com sucesso!");
       }
     }
   </script>
 </body>
 </html>
-
