@@ -34,7 +34,7 @@
 
   <script>
     function comprarOuAdicionar(acao) {
-      const usuarioLogado = localStorage.getItem("usuarioLogado");
+      const usuarioLogado = localStorage.getItem("usuarioLogado") === "true";
 
       if (!usuarioLogado) {
         alert("Você precisa estar logado para realizar essa ação.");
@@ -48,7 +48,15 @@
       };
 
       let carrinho = JSON.parse(localStorage.getItem('cart')) || [];
-      carrinho.push(produto);
+      const index = carrinho.findIndex(item => item.nome === produto.nome);
+
+      if (index !== -1) {
+        carrinho[index].quantidade += 1;
+      } else {
+        produto.quantidade = 1;
+        carrinho.push(produto);
+      }
+
       localStorage.setItem('cart', JSON.stringify(carrinho));
 
       if (acao === 'comprar') {
@@ -60,4 +68,3 @@
   </script>
 </body>
 </html>
-
