@@ -34,20 +34,24 @@
   </div>
 
   <script>
-    const usuarioLogado = localStorage.getItem("usuarioLogado") === "true";
     function comprarOuAdicionar(acao) {
+      const usuarioLogado = localStorage.getItem("usuarioLogado");
+
       if (!usuarioLogado) {
         alert("Você precisa estar logado para realizar essa ação.");
         return;
       }
+
       const produto = {
         nome: "Aurora",
         imagem: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcT-p3vpeaIDSAkc0cJgY20BBu_Rf7dcpvx4ww24aFWyMdouJMI-zoqyIlPFNPxUblNk2fCEociBkcuFQXSC12xWWmc79yxY2rXz-ehhRjQTkKMaklDrTc-grQ",
         preco: "R$ 109,90"
       };
+
       localStorage.setItem("produtoSelecionado", JSON.stringify(produto));
       window.location.href = "carrinho.html";
     }
   </script>
 </body>
 </html>
+
