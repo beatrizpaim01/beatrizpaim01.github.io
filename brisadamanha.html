@@ -44,11 +44,18 @@
       const produto = {
         nome: "Brisa Da Manhã",
         imagem: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRj-1T-6kjWWoERJBB45BTDpDIoE2YO5LQd3O_ZrBTLMLBi--SmJs31hTHCibj0bRzc10qotcE7SLcSjUt8W8e1qc7kWAC5bvKFNK7QTxVRGZYfOaHnGpIk7l0",
-        preco: "R$ 135,50"
+        preco: 135.50
       };
 
-      localStorage.setItem("produtoSelecionado", JSON.stringify(produto));
-      window.location.href = "carrinho.html";
+      let carrinho = JSON.parse(localStorage.getItem('cart')) || [];
+      carrinho.push(produto);
+      localStorage.setItem('cart', JSON.stringify(carrinho));
+
+      if (acao === 'comprar') {
+        window.location.href = "carrinho.html";
+      } else {
+        alert("Produto adicionado ao carrinho!");
+      }
     }
   </script>
 </body>
