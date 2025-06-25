@@ -33,20 +33,24 @@
   </div>
 
   <script>
-    const usuarioLogado = localStorage.getItem("usuarioLogado") === "true";
     function comprarOuAdicionar(acao) {
+      const usuarioLogado = localStorage.getItem("usuarioLogado");
+
       if (!usuarioLogado) {
         alert("Você precisa estar logado para realizar essa ação.");
         return;
       }
+
       const produto = {
         nome: "Brisa Da Manhã",
         imagem: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRj-1T-6kjWWoERJBB45BTDpDIoE2YO5LQd3O_ZrBTLMLBi--SmJs31hTHCibj0bRzc10qotcE7SLcSjUt8W8e1qc7kWAC5bvKFNK7QTxVRGZYfOaHnGpIk7l0",
         preco: "R$ 135,50"
       };
+
       localStorage.setItem("produtoSelecionado", JSON.stringify(produto));
       window.location.href = "carrinho.html";
     }
   </script>
 </body>
 </html>
+
