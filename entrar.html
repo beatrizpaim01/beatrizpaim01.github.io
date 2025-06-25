@@ -83,15 +83,30 @@
 
   <script>
     function login() {
-      const email = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value.trim();
+      const emailDigitado = document.getElementById('email').value.trim();
+      const senhaDigitada = document.getElementById('password').value.trim();
 
-      if (email && password) {
-        localStorage.setItem('userLoggedIn', 'true');
+      if (!emailDigitado || !senhaDigitada) {
+        alert('Por favor, preencha o e-mail e a senha.');
+        return;
+      }
+
+      // Pega o usuário cadastrado do localStorage
+      const usuarioCadastradoJSON = localStorage.getItem('usuarioLogado');
+      if (!usuarioCadastradoJSON) {
+        alert('Nenhum usuário cadastrado encontrado. Por favor, cadastre-se primeiro.');
+        return;
+      }
+
+      const usuarioCadastrado = JSON.parse(usuarioCadastradoJSON);
+
+      if (emailDigitado === usuarioCadastrado.email && senhaDigitada === usuarioCadastrado.senha) {
+        // Login válido
+        localStorage.setItem('usuarioLogado', JSON.stringify({...usuarioCadastrado, logado: true}));
         alert('Login realizado com sucesso!');
         window.location.href = 'produtos.html';
       } else {
-        alert('Senha ou email inválidos.');
+        alert('Email ou senha incorretos.');
       }
     }
   </script>
