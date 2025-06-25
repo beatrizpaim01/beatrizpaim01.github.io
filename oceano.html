@@ -34,18 +34,37 @@
 
   <script>
     const usuarioLogado = localStorage.getItem("usuarioLogado") === "true";
+
     function comprarOuAdicionar(acao) {
       if (!usuarioLogado) {
         alert("Você precisa estar logado para realizar essa ação.");
         return;
       }
+
       const produto = {
         nome: "Oceano",
         imagem: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQCqFP2XLOugoFO2yc6dcpv1FPLqK3i7D1mh_z5PYVbTTM3aUVB5O84aoc14BEN9V8-3UP3zrdG9-S1MIhJ1F5voC3abEnHPAckjM9uK1XQeHW3cmUw9rL7_g",
-        preco: "R$ 119,90"
+        preco: 119.90,
+        precoFormatado: "R$ 119,90",
+        quantidade: 1
       };
-      localStorage.setItem("produtoSelecionado", JSON.stringify(produto));
-      window.location.href = "carrinho.html";
+
+      let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+      const index = carrinho.findIndex(item => item.nome === produto.nome);
+
+      if (index !== -1) {
+        carrinho[index].quantidade += 1;
+      } else {
+        carrinho.push(produto);
+      }
+
+      localStorage.setItem("carrinho", JSON.stringify(carrinho));
+
+      if (acao === "comprar") {
+        window.location.href = "carrinho.html";
+      } else {
+        alert("Produto adicionado ao carrinho!");
+      }
     }
   </script>
 </body>
