@@ -95,7 +95,7 @@
 
   <script>
     function comprarOuAdicionar(acao) {
-      const usuarioLogado = localStorage.getItem("usuarioLogado");
+      const usuarioLogado = localStorage.getItem("usuarioLogado") === "true";
 
       if (!usuarioLogado) {
         alert("Você precisa estar logado para realizar essa ação.");
@@ -103,13 +103,21 @@
       }
 
       const produto = {
-        name: "Dancing Light",
-        img: "https://www.olfactivestudio.com/cdn/shop/products/DancingLightSquare_LD_39d02aa0-c8cd-4182-8b8a-3b72b5ad24c5.jpg?v=1648050763&width=1500",
-        price: 319.90
+        nome: "Dancing Light",
+        imagem: "https://www.olfactivestudio.com/cdn/shop/products/DancingLightSquare_LD_39d02aa0-c8cd-4182-8b8a-3b72b5ad24c5.jpg?v=1648050763&width=1500",
+        preco: 319.90
       };
 
-      const carrinho = JSON.parse(localStorage.getItem("cart")) || [];
-      carrinho.push(produto);
+      let carrinho = JSON.parse(localStorage.getItem("cart")) || [];
+      const index = carrinho.findIndex(item => item.nome === produto.nome);
+
+      if (index !== -1) {
+        carrinho[index].quantidade += 1;
+      } else {
+        produto.quantidade = 1;
+        carrinho.push(produto);
+      }
+
       localStorage.setItem("cart", JSON.stringify(carrinho));
 
       if (acao === "comprar") {
@@ -121,4 +129,3 @@
   </script>
 </body>
 </html>
-
