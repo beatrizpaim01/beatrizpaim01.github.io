@@ -33,9 +33,9 @@
   </div>
 
   <script>
-    function comprarOuAdicionar(acao) {
-      const usuarioLogado = localStorage.getItem("usuarioLogado");
+    const usuarioLogado = localStorage.getItem("usuarioLogado") === "true";
 
+    function comprarOuAdicionar(acao) {
       if (!usuarioLogado) {
         alert("Você precisa estar logado para realizar essa ação.");
         return;
@@ -44,25 +44,25 @@
       const produto = {
         nome: "Noite Azul",
         imagem: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSf4-9HKGSLGZi9ijFpMxiuI9tDnxP24wwFgssG7ALxfyJU1UO0SqcQfNNEkx1TSDbDsF4g908wEXamDqk1frDUIM5fTKPa5igZiPrCYNNhoZLd9ypgUxai",
-        preco: 189.00,
-        quantidade: 1
+        preco: 189.00
       };
 
-      let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-      const index = carrinho.findIndex(item => item.nome === produto.nome);
+      let carrinho = JSON.parse(localStorage.getItem("cart")) || [];
+      const indexExistente = carrinho.findIndex(p => p.nome === produto.nome);
 
-      if (index !== -1) {
-        carrinho[index].quantidade += 1;
+      if (indexExistente !== -1) {
+        carrinho[indexExistente].quantidade += 1;
       } else {
+        produto.quantidade = 1;
         carrinho.push(produto);
       }
 
-      localStorage.setItem("carrinho", JSON.stringify(carrinho));
+      localStorage.setItem("cart", JSON.stringify(carrinho));
 
       if (acao === "comprar") {
         window.location.href = "carrinho.html";
       } else {
-        alert("Produto adicionado ao carrinho com sucesso!");
+        alert("Produto adicionado ao carrinho!");
       }
     }
   </script>
