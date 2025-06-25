@@ -2,102 +2,17 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Carrinho - Perfumaria Vênus</title>
+  <title>Venus Rosé - Perfumaria Vênus</title>
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #fff0f6;
-      color: #333;
-    }
-    .topbar {
-      background-color: #ff80ab;
-      color: white;
-      padding: 10px;
-      text-align: center;
-    }
-    .navbar {
-      display: flex;
-      justify-content: center;
-      background-color: #add8e6;
-      padding: 10px 0;
-    }
-    .navbar a {
-      color: #333;
-      text-decoration: none;
-      padding: 10px 20px;
-      font-weight: bold;
-    }
-    .navbar a:hover {
-      background-color: #d0eaff;
-      border-radius: 8px;
-    }
-    .container {
-      max-width: 900px;
-      margin: 40px auto;
-      background: white;
-      padding: 20px 30px;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    h1 {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 20px;
-    }
-    th, td {
-      padding: 12px;
-      border-bottom: 1px solid #ddd;
-      text-align: center;
-    }
-    th {
-      background-color: #ff80ab;
-      color: white;
-      border-radius: 8px 8px 0 0;
-    }
-    img {
-      max-width: 80px;
-      border-radius: 8px;
-    }
-    input[type="number"] {
-      width: 60px;
-      padding: 5px;
-      font-size: 16px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      text-align: center;
-    }
-    button {
-      padding: 10px 20px;
-      background-color: #ff80ab;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background-color 0.3s;
-    }
-    button:hover {
-      background-color: #f06292;
-    }
-    .remover-btn {
-      background-color: #e57373;
-      padding: 6px 12px;
-      font-size: 14px;
-    }
-    .remover-btn:hover {
-      background-color: #ef5350;
-    }
-    .total {
-      text-align: right;
-      font-size: 20px;
-      font-weight: bold;
-      margin-top: 20px;
-    }
+    body { margin: 0; font-family: Arial, sans-serif; background-color: #fff0f6; color: #333; }
+    .topbar { background-color: #ff80ab; color: white; padding: 10px; text-align: center; }
+    .navbar { display: flex; justify-content: center; background-color: #add8e6; padding: 10px 0; }
+    .navbar a { color: #333; text-decoration: none; padding: 10px 20px; font-weight: bold; }
+    .navbar a:hover { background-color: #d0eaff; border-radius: 8px; }
+    .produto { max-width: 800px; margin: 40px auto; text-align: center; background-color: white; padding: 30px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); }
+    .produto img { max-width: 300px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); }
+    button { margin: 10px; padding: 10px 20px; border: none; background-color: #ff80ab; color: white; font-size: 16px; border-radius: 8px; cursor: pointer; }
+    button:hover { background-color: #f06292; }
   </style>
 </head>
 <body>
@@ -109,100 +24,56 @@
     <a href="entrar.html">Login</a>
   </div>
 
-  <div class="container">
-    <h1>Seu Carrinho</h1>
-    <table id="tabela-carrinho">
-      <thead>
-        <tr>
-          <th>Produto</th>
-          <th>Imagem</th>
-          <th>Preço Unitário</th>
-          <th>Quantidade</th>
-          <th>Subtotal</th>
-          <th>Remover</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Produtos vão aparecer aqui via JS -->
-      </tbody>
-    </table>
-
-    <div class="total" id="total-carrinho">Total: R$ 0,00</div>
-
-    <div style="text-align: center; margin-top: 30px;">
-      <button id="finalizar-compra">Finalizar Compra</button>
-    </div>
+  <div class="produto">
+    <h1>Venus Rosé</h1>
+    <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQVdCnMpWkJ2KEZztKPCpo1V7xniJDCPDBFzq-9DWNjGZPCIgkaIiHwYE5E4UG3JI47hMbhMjiKiNhhfGZNyNfB632_MwqPGA2VaQeQMfx4EmMRgH8s-JnjEuhn" alt="Venus Rosé" />
+    <p>Preço: R$ 146,90</p>
+    <button onclick="comprarOuAdicionar('comprar')">Comprar agora</button>
+    <button onclick="comprarOuAdicionar('carrinho')">Adicionar ao carrinho</button>
   </div>
 
   <script>
-    function formatarPreco(valor) {
-      return "R$ " + valor.toFixed(2).replace('.', ',');
+    const usuarioLogado = localStorage.getItem("usuarioLogado") === "true";
+
+    function comprarOuAdicionar(acao) {
+      if (!usuarioLogado) {
+        alert("Você precisa estar logado para realizar essa ação.");
+        return;
+      }
+
+      // Produto com preço numérico para facilitar cálculo
+      const produto = {
+        nome: "Venus Rosé",
+        imagem: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQVdCnMpWkJ2KEZztKPCpo1V7xniJDCPDBFzq-9DWNjGZPCIgkaIiHwYE5E4UG3JI47hMbhMjiKiNhhfGZNyNfB632_MwqPGA2VaQeQMfx4EmMRgH8s-JnjEuhn",
+        preco: 146.90,
+        quantidade: 1
+      };
+
+      // Pega carrinho do localStorage, ou cria vazio
+      let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+      // Verifica se produto já está no carrinho
+      const index = carrinho.findIndex(item => item.nome === produto.nome);
+
+      if (index > -1) {
+        // Produto já existe no carrinho, aumenta quantidade
+        carrinho[index].quantidade += 1;
+      } else {
+        // Produto não existe, adiciona
+        carrinho.push(produto);
+      }
+
+      // Salva carrinho atualizado
+      localStorage.setItem("carrinho", JSON.stringify(carrinho));
+
+      if (acao === 'comprar') {
+        // Vai direto para checkout/carrinho
+        window.location.href = "carrinho.html";
+      } else {
+        alert("Produto adicionado ao carrinho!");
+      }
     }
-
-    function carregarCarrinho() {
-      const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-      const tbody = document.querySelector("#tabela-carrinho tbody");
-      tbody.innerHTML = "";
-
-      let total = 0;
-
-      carrinho.forEach((produto, index) => {
-        const subtotal = produto.preco * produto.quantidade;
-        total += subtotal;
-
-        const tr = document.createElement("tr");
-
-        tr.innerHTML = `
-          <td>${produto.nome}</td>
-          <td><img src="${produto.imagem}" alt="${produto.nome}"></td>
-          <td>${formatarPreco(produto.preco)}</td>
-          <td>
-            <input type="number" min="1" value="${produto.quantidade}" data-index="${index}" class="quantidade-input" />
-          </td>
-          <td>${formatarPreco(subtotal)}</td>
-          <td><button class="remover-btn" data-index="${index}">X</button></td>
-        `;
-
-        tbody.appendChild(tr);
-      });
-
-      document.getElementById("total-carrinho").textContent = "Total: " + formatarPreco(total);
-
-      // Eventos para inputs de quantidade
-      document.querySelectorAll(".quantidade-input").forEach(input => {
-        input.addEventListener("change", (e) => {
-          const idx = e.target.getAttribute("data-index");
-          let novaQuantidade = parseInt(e.target.value);
-          if (isNaN(novaQuantidade) || novaQuantidade < 1) {
-            novaQuantidade = 1;
-            e.target.value = 1;
-          }
-          carrinho[idx].quantidade = novaQuantidade;
-          localStorage.setItem("carrinho", JSON.stringify(carrinho));
-          carregarCarrinho();
-        });
-      });
-
-      // Eventos para remover produtos
-      document.querySelectorAll(".remover-btn").forEach(btn => {
-        btn.addEventListener("click", (e) => {
-          const idx = e.target.getAttribute("data-index");
-          carrinho.splice(idx, 1);
-          localStorage.setItem("carrinho", JSON.stringify(carrinho));
-          carregarCarrinho();
-        });
-      });
-    }
-
-    document.getElementById("finalizar-compra").addEventListener("click", () => {
-      alert("Compra finalizada! Obrigado por comprar na Perfumaria Vênus.");
-      localStorage.removeItem("carrinho");
-      carregarCarrinho();
-      // Aqui você pode redirecionar para uma página de confirmação, por exemplo
-    });
-
-    // Inicializa a página carregando o carrinho
-    carregarCarrinho();
   </script>
 </body>
 </html>
+
