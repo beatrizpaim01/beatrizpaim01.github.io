@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lume Perfumaria - Nossa História</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --azul-principal: #2b5e8b;
+      --cinza-claro: #cad0d1;
+      --azul-claro: #e7fbff;
+      --branco: #ffffff;
+      --destaque: #ff9f43;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { color: var(--azul-principal); background-color: var(--branco); }
+
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+    /* Topbar */
+    .topbar { background-color: var(--azul-principal); color: var(--branco); padding: 8px 0; font-size: 14px; }
+    .topbar-content { display: flex; justify-content: space-between; align-items: center; }
+    .contact-info { display: flex; gap: 20px; }
+    .social-icons { display: flex; gap: 15px; }
+    .social-icons a { color: var(--branco); text-decoration: none; transition: color 0.3s; }
+    .social-icons a:hover { color: var(--cinza-claro); }
+
+    /* Navbar */
+    .navbar { background-color: var(--branco); padding: 15px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    .navbar-content { display: flex; align-items: center; justify-content: space-between; position: relative; }
+    .logo-img { height: 100px; width: auto; object-fit: contain; }
+    .nav-menu { display: flex; list-style: none; gap: 40px; position: absolute; left: 50%; transform: translateX(-50%); }
+    .nav-menu a { color: var(--azul-principal); text-decoration: none; font-weight: 500; transition: color 0.3s; }
+    .nav-menu a:hover { color: #1a3d5d; }
+    .nav-menu a[href="historia.html"] { color: var(--azul-principal); font-weight: bold; position: relative; }
+    .nav-menu a[href="historia.html"]::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 100%; height: 3px; background-color: var(--destaque); border-radius: 2px; }
+
+    /* Hero */
+    .hero { background-image: url('Nova Pasta/MELHOR.png'); background-size: cover; background-position: center; height: 60vh; display:flex; align-items:center; justify-content:center; color: var(--branco); text-align:center; }
+    .hero h1 { font-size: 48px; margin-bottom: 15px; text-shadow: 2px 2px 6px rgba(0,0,0,0.4); }
+    .hero p { font-size: 20px; text-shadow: 1px 1px 4px rgba(0,0,0,0.4); }
+
+    /* Linha do tempo */
+    .timeline { padding: 80px 0; background-color: var(--azul-claro); }
+    .timeline h2 { text-align: center; margin-bottom: 50px; font-size: 32px; }
+    .timeline-container { display: flex; flex-direction: column; gap: 40px; max-width: 900px; margin: 0 auto; }
+    .timeline-item { display: flex; gap: 20px; align-items: center; background-color: var(--branco); padding: 20px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    .timeline-item img { width: 150px; height: 150px; object-fit: cover; border-radius: 10px; }
+    .timeline-item-content h3 { margin-bottom: 10px; color: var(--azul-principal); }
+    .timeline-item-content p { line-height: 1.6; }
+
+    /* Missão / Visão / Valores */
+    .mission { padding: 80px 0; background-color: var(--branco); }
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 32px;
+      color: var(--azul-principal);
+    }
+    .mission-container { display: flex; flex-wrap: wrap; gap: 30px; max-width: 1000px; margin: 0 auto; }
+    .mission-card { flex: 1 1 300px; background-color: var(--azul-claro); padding: 30px; border-radius: 10px; text-align: center; }
+    .mission-card h3 { margin-bottom: 15px; }
+    .mission-card p { line-height: 1.6; }
+
+    /* CTA Final */
+    .final-cta { background-color: var(--azul-principal); color: var(--branco); padding: 80px 0; text-align: center; }
+    .final-cta h2 { margin-bottom: 30px; }
+    .cta-button.highlight { background-color: var(--destaque); color: var(--azul-principal); font-size: 1.1em; padding: 15px 35px; border-radius: 30px; text-decoration: none; font-weight: bold; box-shadow: 0 5px 15px rgba(255, 159, 67, 0.4); }
+    .cta-button.highlight:hover { background-color: #ff8c1a; transform: translateY(-3px) scale(1.05); }
+
+    /* Footer */
+    footer { background-color: var(--azul-claro); padding: 50px 0 20px; }
+    .footer-content { display:flex; flex-direction: column; align-items: center; gap: 30px; margin-bottom:40px; }
+    .footer-logo { height: 60px; width: auto; }
+    .footer-menu { display:flex; gap:30px; list-style:none; }
+    .footer-menu a { color: var(--azul-principal); text-decoration:none; font-weight:500; }
+    .footer-menu a:hover { text-decoration:underline; }
+    .footer-contact { text-align:center; }
+    .footer-bottom { text-align:center; padding-top:20px; border-top:1px solid var(--cinza-claro); }
+
+    /* Responsivo */
+    @media(max-width:900px){
+      .timeline-item { flex-direction: column; text-align:center; }
+      .timeline-item img { margin-bottom:15px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="container topbar-content">
+      <div class="contact-info">
+        <span><i class="fas fa-phone"></i> (11) 3456-7890</span>
+        <span><i class="fas fa-envelope"></i> perfumaria_lume@email.com</span>
+      </div>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container navbar-content">
+      <a href="index.html" class="logo"><img src="Nova pasta/Design_sem_nome-removebg-preview.png" alt="Lume Logo" class="logo-img"></a>
+      <ul class="nav-menu">
+        <li><a href="index.html">Página Inicial</a></li>
+        <li><a href="historia.html">História</a></li>
+        <li><a href="onde-comprar.html">Onde Comprar</a></li>
+        <li><a href="produtos.html">Produtos</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div>
+      <h1>Nossa História</h1>
+      <p>De um sonho a uma marca que encanta os sentidos.</p>
+    </div>
+  </section>
+
+  <!-- Linha do Tempo -->
+  <section class="timeline">
+    <h2>Marcos da Lume Perfumaria</h2>
+    <div class="timeline-container">
+      <div class="timeline-item">
+        <img src="Nova pasta/Lucid_Origin_uma_loja_pequena_de_perfumaria_Lume_realista_como_0.jpg" alt="Fundação">
+        <div class="timeline-item-content">
+          <h3>2021 - Fundação</h3>
+          <p>A Lume nasceu da paixão por fragrâncias que iluminam a vida das pessoas, com o objetivo de criar produtos únicos e sofisticados.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <img src="Nova pasta/Lucid_Origin_Create_an_image_of_the_first_row_of_a_perfumery_w_3.jpg" alt="Primeira Linha">
+        <div class="timeline-item-content">
+          <h3>2022 - Primeira Linha</h3>
+          <p>Lançamento da primeira linha de fragrâncias exclusivas, conquistando rapidamente os amantes de perfumes.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <img src="Nova pasta/mmmm.png" alt="Expansão">
+        <div class="timeline-item-content">
+          <h3>2024 - Expansão</h3>
+          <p>Chegada às lojas físicas em São Paulo e por todo o Brasil, ampliando o acesso aos produtos e fortalecendo a marca.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <img src="Nova pasta/5.png" alt="Digital">
+        <div class="timeline-item-content">
+          <h3>2025 - Premiada a melhor perfumaria do Brasil</h3>
+          <p>Lançamento da loja online, permitindo que clientes de todo o Brasil conheçam e adquiram nossos produtos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Missão / Visão / Valores -->
+  <section class="mission">
+    <div class="container">
+      <h2 class="section-title">Nossa Filosofia</h2>
+      <div class="mission-container">
+        <div class="mission-card">
+          <h3>Missão</h3>
+          <p>Criar fragrâncias que tocam a alma e marcam momentos inesquecíveis.</p>
+        </div>
+        <div class="mission-card">
+          <h3>Visão</h3>
+          <p>Ser referência nacional em perfumaria, reconhecida pela qualidade e inovação.</p>
+        </div>
+        <div class="mission-card">
+          <h3>Valores</h3>
+          <p>Qualidade, Inovação, Sustentabilidade, Atendimento ao Cliente.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Final -->
+  <section class="final-cta">
+    <div class="container">
+      <h2>Descubra a fragrância perfeita para você</h2>
+      <a href="produtos.html" class="cta-button highlight">Ver Todos os Produtos</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <a href="index.html"><img src="Nova pasta/Design_sem_nome-removebg-preview.png" alt="Lume Logo" class="footer-logo"></a>
+        <p>Sinta o brilho. Seja a luz.</p>
+        <ul class="footer-menu">
+          <li><a href="index.html">Página Inicial</a></li>
+          <li><a href="historia.html">História</a></li>
+          <li><a href="onde-comprar.html">Onde Comprar</a></li>
+          <li><a href="produtos.html">Produtos</a></li>
+        </ul>
+        <div class="footer-contact">
+          <h3>Contato</h3>
+          <p><i class="fas fa-phone"></i> (11) 3456-7890</p>
+          <p><i class="fas fa-envelope"></i> perfumaria_lume@email.com</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2023 Lume Perfumaria. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

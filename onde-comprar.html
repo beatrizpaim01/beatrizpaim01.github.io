@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lume Perfumaria - Onde Comprar</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --azul-principal: #2b5e8b;
+      --cinza-claro: #cad0d1;
+      --azul-claro: #e7fbff;
+      --branco: #ffffff;
+      --destaque: #ff9f43;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { color: var(--azul-principal); background-color: var(--branco); }
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+    /* Topbar */
+    .topbar { background-color: var(--azul-principal); color: var(--branco); padding: 8px 0; font-size: 14px; }
+    .topbar-content { display: flex; justify-content: space-between; align-items: center; }
+    .contact-info { display: flex; gap: 20px; }
+    .social-icons { display: flex; gap: 15px; }
+    .social-icons a { color: var(--branco); text-decoration: none; transition: color 0.3s; }
+    .social-icons a:hover { color: var(--cinza-claro); }
+
+    /* Navbar */
+    .navbar { background-color: var(--branco); padding: 15px 0; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); }
+    .navbar-content { display: flex; align-items: center; justify-content: space-between; position: relative; }
+    .logo-img { height: 100px; width: auto; object-fit: contain; }
+    .nav-menu { display: flex; list-style: none; gap: 40px; position: absolute; left: 50%; transform: translateX(-50%); }
+    .nav-menu a { color: var(--azul-principal); text-decoration: none; font-weight: 500; transition: color 0.3s; }
+    .nav-menu a:hover { color: #1a3d5d; }
+    .nav-menu a[href="onde-comprar.html"] { color: var(--azul-principal); font-weight: bold; position: relative; }
+    .nav-menu a[href="onde-comprar.html"]::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 100%; height: 3px; background-color: var(--destaque); border-radius: 2px; }
+
+    /* Onde Comprar */
+    .stores { padding: 80px 0; }
+    .section-title { text-align: center; margin-bottom: 50px; font-size: 32px; color: var(--azul-principal); }
+
+    .city-section { margin-bottom: 50px; }
+    .city-title { font-size: 26px; color: var(--azul-principal); margin-bottom: 25px; text-align: center; }
+
+    .stores-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+
+    .store-card {
+      background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+      border-radius: 15px;
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .store-card:hover { transform: translateY(-8px); box-shadow: 0 12px 25px rgba(0,0,0,0.2); }
+
+    .store-card h3 { margin-bottom: 15px; font-size: 20px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+    .store-card p { margin-bottom: 10px; font-size: 16px; color: #333; }
+
+    /* Footer */
+    footer { background-color: var(--azul-claro); padding: 50px 0 20px; }
+    .footer-content { display: flex; flex-direction: column; align-items: center; gap: 30px; margin-bottom: 40px; }
+    .footer-logo { height: 60px; width: auto; }
+    .footer-menu { display: flex; gap: 30px; list-style: none; }
+    .footer-menu a { color: var(--azul-principal); text-decoration: none; font-weight: 500; }
+    .footer-menu a:hover { text-decoration: underline; }
+    .footer-contact { text-align: center; }
+    .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid var(--cinza-claro); }
+  </style>
+</head>
+<body>
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="container topbar-content">
+      <div class="contact-info">
+        <span><i class="fas fa-phone"></i> (11) 3456-7890</span>
+        <span><i class="fas fa-envelope"></i> perfumaria_lume@email.com</span>
+      </div>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container navbar-content">
+      <a href="index.html" class="logo">
+        <img src="Nova pasta/Design_sem_nome-removebg-preview.png" alt="Lume Logo" class="logo-img">
+      </a>
+      <ul class="nav-menu">
+        <li><a href="index.html">Página Inicial</a></li>
+        <li><a href="historia.html">História</a></li>
+        <li><a href="onde-comprar.html">Onde Comprar</a></li>
+        <li><a href="produtos.html">Produtos</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Onde Comprar -->
+  <section class="stores">
+    <div class="container">
+      <h2 class="section-title">Nossas Lojas Físicas</h2>
+
+      <div class="city-section">
+        <h3 class="city-title">São Paulo</h3>
+        <div class="stores-grid">
+          <div class="store-card"><h3><i class="fas fa-map-marker-alt"></i> Loja Principal</h3><p>Av. Paulista, 1000 – São Paulo/SP</p><p>(11) 3456-7890</p></div>
+          <div class="store-card"><h3><i class="fas fa-map-marker-alt"></i> Loja 6</h3><p>Rua Augusta, 800 – São Paulo/SP</p><p>(11) 3567-8901</p></div>
+          <div class="store-card"><h3><i class="fas fa-map-marker-alt"></i> Loja 11</h3><p>Av. Consolação, 600 – São Paulo/SP</p><p>(11) 3344-6677</p></div>
+          <div class="store-card"><h3><i class="fas fa-map-marker-alt"></i> Loja 16</h3><p>Av. Ipiranga, 1100 – São Paulo/SP</p><p>(11) 2233-7788</p></div>
+          <div class="store-card"><h3><i class="fas fa-map-marker-alt"></i> Loja 21</h3><p>Av. Rebouças, 800 – São Paulo/SP</p><p>(11) 3344-1122</p></div>
+        </div>
+      </div>
+
+      <div class="city-section">
+        <h3 class="city-title">Rio de Janeiro</h3>
+        <div class="stores-grid">
+          <div class="store-card"><h3><i class="fas fa-map-marker-alt"></i> Loja 2</h3><p>Rua das Flores, 250 – Rio de Janeiro/RJ</p><p>(21) 2345-6789</p></div>
+          <div class="store-card"><h3><i class="fas fa-map-marker-alt"></i> Loja 7</h3><p>Av. Atlântica, 1200 – Rio de Janeiro/RJ</p><p>(21) 3456-7890</p></div>
+          <div class="store-card"><h3><i class="fas fa-map-marker-alt"></i> Loja 12</h3><p>Rua do Ouvidor, 150 – Rio de Janeiro/RJ</p><p>(21) 2233-4455</p></div>
+          <div class="store-card"><h3><i class="fas fa-map-marker-alt"></i> Loja 17</h3><p>Rua Visconde de Pirajá, 300 – Rio de Janeiro/RJ</p><p>(21) 3344-5566</p></div>
+          <div class="store-card"><h3><i class="fas fa-map-marker-alt"></i> Loja 22</h3><p>Rua do Catete, 200 – Rio de Janeiro/RJ</p><p>(21) 2233-7788</p></div>
+        </div>
+      </div>
+
+      <div class="city-section">
+        <h3 class="city-title">Porto Alegre</h3>
+        <div class="stores-grid">
+          <div class="store-card"><h3><i class="fas fa-map-marker-alt"></i> Loja 3</h3><p>Av. Borges de Medeiros, 500 – Porto Alegre/RS</p><p>(51) 3456-7890</p></div>
+          <div class="store-card"><h3><i class="fas fa-map-marker-alt"></i> Loja 8</h3><p>Rua dos Andradas, 400 – Porto Alegre/RS</p><p>(51) 2256-1122</p></div>
+          <div class="store-card"><h3><i class="fas fa-map-marker-alt"></i> Loja 13</h3><p>Rua da Praia, 500 – Porto Alegre/RS</p><p>(51) 3344-5566</p></div>
+          <div class="store-card"><h3><i class="fas fa-map-marker-alt"></i> Loja 18</h3><p>Rua 24 de Outubro, 700 – Porto Alegre/RS</p><p>(51) 2233-3344</p></div>
+          <div class="store-card"><h3><i class="fas fa-map-marker-alt"></i> Loja 23</h3><p>Rua da República, 600 – Porto Alegre/RS</p><p>(51) 3344-8899</p></div>
+        </div>
+      </div>
+
+      <div class="city-section">
+        <h3 class="city-title">Outras Cidades</h3>
+        <div class="stores-grid">
+          <div class="store-card"><h3><i class="fas fa-map-marker-alt"></i> Loja 4</h3><p>Rua XV de Novembro, 200 – Curitiba/PR</p><p>(41) 3344-5566</p></div>
+          <div class="store-card"><h3><i class="fas fa-map-marker-alt"></i> Loja 5</h3><p>Av. Sete de Setembro, 150 – Belo Horizonte/MG</p><p>(31) 2133-4455</p></div>
+          <div class="store-card"><h3><i class="fas fa-map-marker-alt"></i> Loja 9</h3><p>Av. Paraná, 300 – Curitiba/PR</p><p>(41) 3344-7788</p></div>
+          <div class="store-card"><h3><i class="fas fa-map-marker-alt"></i> Loja 10</h3><p>Rua da Bahia, 700 – Belo Horizonte/MG</p><p>(31) 2233-5566</p></div>
+          <div class="store-card"><h3><i class="fas fa-map-marker-alt"></i> Loja 14</h3><p>Av. Sete de Abril, 900 – Curitiba/PR</p><p>(41) 2233-8899</p></div>
+          <div class="store-card"><h3><i class="fas fa-map-marker-alt"></i> Loja 15</h3><p>Rua Goiás, 250 – Belo Horizonte/MG</p><p>(31) 3344-1122</p></div>
+          <div class="store-card"><h3><i class="fas fa-map-marker-alt"></i> Loja 20</h3><p>Rua Espírito Santo, 500 – Manaus/AM</p><p>(92) 2233-4455</p></div>
+          <div class="store-card"><h3><i class="fas fa-map-marker-alt"></i> Loja 24</h3><p>Av. Sete de Setembro, 500 – Macapá/AP</p><p>(96) 2233-5566</p></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <a href="index.html">
+          <img src="Nova pasta/Design_sem_nome-removebg-preview.png" alt="Lume Logo" class="footer-logo">
+        </a>
+        <p>Sinta o brilho. Seja a luz.</p>
+        <ul class="footer-menu">
+          <li><a href="index.html">Página Inicial</a></li>
+          <li><a href="historia.html">História</a></li>
+          <li><a href="onde-comprar.html">Onde Comprar</a></li>
+          <li><a href="produtos.html">Produtos</a></li>
+        </ul>
+        <div class="footer-contact">
+          <h3>Contato</h3>
+          <p><i class="fas fa-phone"></i> (11) 3456-7890</p>
+          <p><i class="fas fa-envelope"></i> perfumaria_lume@email.com</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2023 Lume Perfumaria. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

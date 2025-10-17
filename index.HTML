@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lume Perfumaria - Sinta o brilho. Seja a luz.</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --azul-principal: #2b5e8b;
+      --cinza-claro: #cad0d1;
+      --azul-claro: #e7fbff;
+      --branco: #ffffff;
+      --destaque: #ff9f43;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      color: var(--azul-principal);
+      background-color: var(--branco);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Topbar */
+    .topbar {
+      background-color: var(--azul-principal);
+      color: var(--branco);
+      padding: 8px 0;
+      font-size: 14px;
+    }
+
+    .topbar-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .contact-info {
+      display: flex;
+      gap: 20px;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-icons a {
+      color: var(--branco);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: var(--cinza-claro);
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: var(--branco);
+      padding: 15px 0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .logo-img {
+      height: 100px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 40px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .nav-menu a {
+      color: var(--azul-principal);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-menu a:hover {
+      color: #1a3d5d;
+    }
+
+    .nav-menu a[href="produtos.html"] {
+      color: var(--azul-principal);
+      font-weight: bold;
+      position: relative;
+    }
+
+    .nav-menu a[href="produtos.html"]::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: var(--destaque);
+      border-radius: 2px;
+    }
+
+    /* Carrossel */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      height: 80vh;
+    }
+
+    .carousel {
+      position: relative;
+      height: 100%;
+    }
+
+    .carousel-inner {
+      display: flex;
+      height: 100%;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-item {
+      min-width: 100%;
+      height: 100%;
+    }
+
+    .carousel-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .carousel-control {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.5);
+      color: var(--branco);
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      font-size: 24px;
+      z-index: 10;
+    }
+
+    .carousel-control.prev { left: 10px; }
+    .carousel-control.next { right: 10px; }
+
+    .carousel-indicators {
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+    }
+
+    .carousel-indicators button {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+    }
+
+    .carousel-indicators button.active {
+      background: var(--destaque);
+    }
+
+    /* Benefícios */
+    .benefits {
+      padding: 80px 0;
+      background-color: var(--azul-claro);
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+      font-size: 32px;
+      color: var(--azul-principal);
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .benefit-card {
+      background-color: var(--branco);
+      border-radius: 10px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+
+    .benefit-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .benefit-icon {
+      font-size: 40px;
+      color: var(--azul-principal);
+      margin-bottom: 20px;
+    }
+
+    /* Sobre */
+    .about {
+      padding: 80px 0;
+      background-color: var(--branco);
+    }
+
+    .about-content {
+      display: flex;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .about-text { flex: 1; }
+
+    .about-image {
+      flex: 1;
+    }
+
+    .about-image img {
+      width: 100%;
+      height: 400px;
+      border-radius: 10px;
+      object-fit: cover;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Botão da seção Sobre mais pra baixo */
+    .about-text .cta-button {
+      display: inline-block;
+      margin-top: 50px;
+    }
+
+    /* Depoimentos */
+    .testimonials {
+      padding: 80px 0;
+      background-color: var(--azul-claro);
+      text-align: center;
+    }
+
+    .testimonial {
+      max-width: 800px;
+      margin: 0 auto;
+      font-style: italic;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .testimonial-author {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    /* CTA Final */
+    .final-cta {
+      background-color: var(--azul-principal);
+      color: var(--branco);
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    .final-cta h2 { margin-bottom: 30px; }
+
+    .cta-button.highlight {
+      background-color: var(--destaque);
+      color: var(--azul-principal);
+      font-size: 1.1em;
+      padding: 15px 35px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 5px 15px rgba(255, 159, 67, 0.4);
+    }
+
+    .cta-button.highlight:hover {
+      background-color: #ff8c1a;
+      transform: translateY(-3px) scale(1.05);
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--azul-claro);
+      padding: 50px 0 20px;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .footer-logo {
+      height: 60px;
+      width: auto;
+    }
+
+    .footer-menu {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    .footer-menu a {
+      color: var(--azul-principal);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer-menu a:hover { text-decoration: underline; }
+
+    .footer-contact { text-align: center; }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid var(--cinza-claro);
+    }
+  </style>
+</head>
+<body>
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="container topbar-content">
+      <div class="contact-info">
+        <span><i class="fas fa-phone"></i> (11) 3456-7890</span>
+        <span><i class="fas fa-envelope"></i> perfumaria_lume@email.com</span>
+      </div>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container navbar-content">
+      <a href="index.html" class="logo">
+        <img src="Nova pasta/Design_sem_nome-removebg-preview.png" alt="Lume Logo" class="logo-img">
+      </a>
+      <ul class="nav-menu">
+        <li><a href="index.html">Página Inicial</a></li>
+        <li><a href="historia.html">História</a></li>
+        <li><a href="onde-comprar.html">Onde Comprar</a></li>
+        <li><a href="produtos.html">Produtos</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero (Carrossel) -->
+  <section class="hero">
+    <div class="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <a href="produtos.html"><img src="Nova pasta/5.png" alt="Banner 1"></a>
+        </div>
+        <div class="carousel-item">
+          <a href="historia.html"><img src="Nova pasta/6.png" alt="Banner 2"></a>
+        </div>
+        <div class="carousel-item">
+          <a href="onde-comprar.html"><img src="images/img3.jpg" alt="Banner 3"></a>
+        </div>
+      </div>
+      <button class="carousel-control prev" onclick="moveSlide(-1)">&#10094;</button>
+      <button class="carousel-control next" onclick="moveSlide(1)">&#10095;</button>
+      <div class="carousel-indicators">
+        <button class="active" onclick="currentSlide(0)"></button>
+        <button onclick="currentSlide(1)"></button>
+        <button onclick="currentSlide(2)"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefícios -->
+  <section class="benefits">
+    <div class="container">
+      <h2 class="section-title">Por que escolher a Lume?</h2>
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon"><i class="fas fa-star"></i></div>
+          <h3>Qualidade Premium</h3>
+          <p>Nossos produtos são desenvolvidos com os melhores ingredientes e tecnologia de ponta.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon"><i class="fas fa-leaf"></i></div>
+          <h3>Ingredientes Naturais</h3>
+          <p>Utilizamos extratos naturais e fórmulas que respeitam o meio ambiente.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon"><i class="fas fa-gem"></i></div>
+          <h3>Elegância e Sofisticação</h3>
+          <p>Design e fragrâncias que transmitem sofisticação e personalidade única.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon"><i class="fas fa-heart"></i></div>
+          <h3>Feito com Amor</h3>
+          <p>Cada produto é criado com dedicação e paixão pela arte da perfumaria.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sobre -->
+  <section class="about">
+    <div class="container about-content">
+      <div class="about-text">
+        <h2 class="section-title">Sobre a Lume</h2>
+        <p>A Lume nasceu da paixão por fragrâncias que iluminam e transformam. Nossa missão é criar produtos que não apenas realcem a beleza, mas também inspirem confiança e brilho interior.</p>
+        <p>Combinamos inovação e elegância em cada produto, utilizando ingredientes de alta qualidade e fragrâncias exclusivas que cativam os sentidos.</p>
+        <a href="produtos.html" class="cta-button highlight">Conheça nossos produtos</a>
+      </div>
+      <div class="about-image">
+        <img src="Nova pasta/Lume (Apresentação) (4).png" alt="Sobre a Lume">
+      </div>
+    </div>
+  </section>
+
+  <!-- Depoimentos -->
+  <section class="testimonials">
+    <div class="container">
+      <h2 class="section-title">O que nossos clientes dizem</h2>
+      <div class="testimonial">
+        <p>"Os perfumes da Lume são simplesmente incríveis! A fragrância é única e dura o dia todo. Recebo elogios sempre que uso!"</p>
+        <p class="testimonial-author">- Mariana Silva, São Paulo</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Final -->
+  <section class="final-cta">
+    <div class="container">
+      <h2>Descubra a fragrância perfeita para você</h2>
+      <a href="produtos.html" class="cta-button highlight">Ver Todos os Produtos</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <a href="index.html">
+          <img src="Nova pasta/Design_sem_nome-removebg-preview.png" alt="Lume Logo" class="footer-logo">
+        </a>
+        <p>Sinta o brilho. Seja a luz.</p>
+        <ul class="footer-menu">
+          <li><a href="index.html">Página Inicial</a></li>
+          <li><a href="historia.html">História</a></li>
+          <li><a href="onde-comprar.html">Onde Comprar</a></li>
+          <li><a href="produtos.html">Produtos</a></li>
+        </ul>
+        <div class="footer-contact">
+          <h3>Contato</h3>
+          <p><i class="fas fa-phone"></i> (11) 3456-7890</p>
+          <p><i class="fas fa-envelope"></i> perfumaria_lume@email.com</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2023 Lume Perfumaria. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script do Carrossel -->
+  <script>
+    let currentIndex = 0;
+    const items = document.querySelectorAll('.carousel-item');
+    const indicators = document.querySelectorAll('.carousel-indicators button');
+
+    function showSlide(index) {
+      if (index >= items.length) currentIndex = 0;
+      else if (index < 0) currentIndex = items.length - 1;
+      else currentIndex = index;
+
+      const offset = -currentIndex * 100;
+      document.querySelector('.carousel-inner').style.transform = `translateX(${offset}%)`;
+
+      indicators.forEach((btn, i) => {
+        btn.classList.toggle('active', i === currentIndex);
+      });
+    }
+
+    function moveSlide(step) {
+      showSlide(currentIndex + step);
+    }
+
+    function currentSlide(index) {
+      showSlide(index);
+    }
+
+    setInterval(() => {
+      moveSlide(1);
+    }, 5000);
+  </script>
+</body>
+</html>
+

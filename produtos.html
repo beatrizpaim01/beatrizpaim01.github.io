@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lume Perfumaria - Produtos</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --azul-principal: #2b5e8b;
+      --cinza-claro: #cad0d1;
+      --azul-claro: #e7fbff;
+      --branco: #ffffff;
+      --destaque: #ff9f43;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      color: var(--azul-principal);
+      background-color: var(--branco);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Topbar */
+    .topbar {
+      background-color: var(--azul-principal);
+      color: var(--branco);
+      padding: 8px 0;
+      font-size: 14px;
+    }
+
+    .topbar-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .contact-info {
+      display: flex;
+      gap: 20px;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-icons a {
+      color: var(--branco);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: var(--cinza-claro);
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: var(--branco);
+      padding: 15px 0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .logo-img {
+      height: 100px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 40px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .nav-menu a {
+      color: var(--azul-principal);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-menu a:hover {
+      color: #1a3d5d;
+    }
+
+    .nav-menu a[href="produtos.html"] {
+      color: var(--azul-principal);
+      font-weight: bold;
+      position: relative;
+    }
+
+    .nav-menu a[href="produtos.html"]::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: var(--destaque);
+      border-radius: 2px;
+    }
+
+    /* Produtos */
+    .products {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+      font-size: 32px;
+      color: var(--azul-principal);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .product-card {
+      background-color: var(--branco);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      transition: transform 0.3s;
+    }
+
+    .product-card img:hover {
+      transform: scale(1.05);
+    }
+
+    .product-card h3 {
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
+    .product-card p {
+      margin-bottom: 10px;
+      font-size: 16px;
+      color: #555;
+    }
+
+    .product-card .price {
+      font-weight: bold;
+      font-size: 18px;
+      color: var(--azul-principal);
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--azul-claro);
+      padding: 50px 0 20px;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .footer-logo {
+      height: 60px;
+      width: auto;
+    }
+
+    .footer-menu {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    .footer-menu a {
+      color: var(--azul-principal);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer-menu a:hover { text-decoration: underline; }
+
+    .footer-contact { text-align: center; }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid var(--cinza-claro);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="container topbar-content">
+      <div class="contact-info">
+        <span><i class="fas fa-phone"></i> (11) 3456-7890</span>
+        <span><i class="fas fa-envelope"></i> perfumaria_lume@email.com</span>
+      </div>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container navbar-content">
+      <a href="index.html" class="logo">
+        <img src="Nova pasta/Design_sem_nome-removebg-preview.png" alt="Lume Logo" class="logo-img">
+      </a>
+      <ul class="nav-menu">
+        <li><a href="index.html">Página Inicial</a></li>
+        <li><a href="historia.html">História</a></li>
+        <li><a href="onde-comprar.html">Onde Comprar</a></li>
+        <li><a href="produtos.html">Produtos</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Produtos -->
+  <section class="products">
+    <div class="container">
+      <h2 class="section-title">Nossos principais produtos</h2>
+      <div class="products-grid">
+
+        <div class="product-card">
+          <a href="vias.html">
+            <img src="Nova pasta/13.png" alt="Vías">
+          </a>
+          <h3>Vías</h3>
+          <p>Perfume de lavanda, com notas de bergamota e limão siciliano.</p>
+          <div class="price">R$ 149,90</div>
+        </div>
+
+        <div class="product-card">
+          <a href="cherie.html">
+            <img src="Nova pasta/12.png" alt="Chérie">
+          </a>
+          <h3>Chérie</h3>
+          <p>Traz elegância, um blush com a cor suave.</p>
+          <div class="price">R$ 129,90</div>
+        </div>
+
+        <div class="product-card">
+          <a href="galasias.html">
+            <img src="Nova pasta/11.png" alt="Galasias">
+          </a>
+          <h3>Galasias</h3>
+          <p>Traz algo lúdico, muito usado para maquiagens artísticas.</p>
+          <div class="price">R$ 179,90</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <a href="index.html">
+          <img src="Nova pasta/Design_sem_nome-removebg-preview.png" alt="Lume Logo" class="footer-logo">
+        </a>
+        <p>Sinta o brilho. Seja a luz.</p>
+        <ul class="footer-menu">
+          <li><a href="index.html">Página Inicial</a></li>
+          <li><a href="historia.html">História</a></li>
+          <li><a href="onde-comprar.html">Onde Comprar</a></li>
+          <li><a href="produtos.html">Produtos</a></li>
+        </ul>
+        <div class="footer-contact">
+          <h3>Contato</h3>
+          <p><i class="fas fa-phone"></i> (11) 3456-7890</p>
+          <p><i class="fas fa-envelope"></i> perfumaria_lume@email.com</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2023 Lume Perfumaria. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

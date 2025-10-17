@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vías - Perfumaria Vênus</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --rosa-principal: #ffb6c1;
+      --azul-claro: #b3e5fc;
+      --branco: #ffffff;
+      --azul-escuro: #2b5e8b;
+      --destaque: #ff9f43;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      color: var(--azul-escuro);
+      background-color: var(--branco);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Topbar */
+    .topbar {
+      background-color: var(--azul-escuro);
+      color: var(--branco);
+      padding: 8px 0;
+      font-size: 14px;
+    }
+
+    .topbar-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .contact-info {
+      display: flex;
+      gap: 20px;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-icons a {
+      color: var(--branco);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: var(--rosa-principal);
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: var(--branco);
+      padding: 15px 0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .logo-img {
+      height: 100px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 40px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .nav-menu a {
+      color: var(--azul-escuro);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-menu a:hover {
+      color: var(--rosa-principal);
+    }
+
+    /* Produto */
+    .product-section {
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    .product-section img {
+      width: 300px;
+      height: 350px;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+
+    .product-section h2 {
+      font-size: 32px;
+      color: var(--azul-escuro);
+      margin-bottom: 10px;
+    }
+
+    .product-section p {
+      max-width: 600px;
+      margin: 0 auto 20px;
+      font-size: 18px;
+      color: #555;
+    }
+
+    .price {
+      font-size: 24px;
+      color: var(--rosa-principal);
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--azul-claro);
+      padding: 50px 0 20px;
+      margin-top: 60px;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .footer-logo {
+      height: 60px;
+      width: auto;
+    }
+
+    .footer-menu {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    .footer-menu a {
+      color: var(--azul-escuro);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer-menu a:hover { text-decoration: underline; }
+
+    .footer-contact { text-align: center; }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid var(--rosa-principal);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="container topbar-content">
+      <div class="contact-info">
+        <span><i class="fas fa-phone"></i> (11) 3456-7890</span>
+        <span><i class="fas fa-envelope"></i> perfumaria_venus@email.com</span>
+      </div>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container navbar-content">
+      <a href="index.html" class="logo">
+        <img src="Nova pasta/Design_sem_nome-removebg-preview.png" alt="Logo Perfumaria Vênus" class="logo-img">
+      </a>
+      <ul class="nav-menu">
+        <li><a href="index.html">Página Inicial</a></li>
+        <li><a href="historia.html">História</a></li>
+        <li><a href="onde-comprar.html">Onde Comprar</a></li>
+        <li><a href="produtos.html">Produtos</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Produto Vías -->
+  <section class="product-section">
+    <div class="container">
+      <img src="Nova pasta/11.png" alt="Perfume Vías">
+      <h2>Chérie</h2>
+      <p>Atender o público geral, de todas as faixas etárias. Traz algo lúdico,usado principalmente por maquiadores artísticas</p>
+      <div class="price">R$ 179,90</div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <a href="index.html">
+          <img src="Nova pasta/Design_sem_nome-removebg-preview.png" alt="Logo Perfumaria Vênus" class="footer-logo">
+        </a>
+        <p>Sinta o brilho. Seja a luz.</p>
+        <ul class="footer-menu">
+          <li><a href="index.html">Página Inicial</a></li>
+          <li><a href="historia.html">História</a></li>
+          <li><a href="onde-comprar.html">Onde Comprar</a></li>
+          <li><a href="produtos.html">Produtos</a></li>
+        </ul>
+        <div class="footer-contact">
+          <h3>Contato</h3>
+          <p><i class="fas fa-phone"></i> (11) 3456-7890</p>
+          <p><i class="fas fa-envelope"></i> perfumaria_venus@email.com</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Perfumaria Vênus. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
